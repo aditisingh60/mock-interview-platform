@@ -1,8 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const { getQuestions, getQuestionById } = require("../controllers/questionController");
+const authMiddleware = require("../middleware/authMiddleware");
 
-router.get('/', (req, res) => {
-  res.send('Questions route');
-});
+// Questions fetch karo — login zaroori hai
+router.get("/", authMiddleware, getQuestions);
+
+// Single question by ID
+router.get("/:id", authMiddleware, getQuestionById);
 
 module.exports = router;

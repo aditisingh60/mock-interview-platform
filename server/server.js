@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
+const questionRoutes = require("./routes/questions");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/questions", questionRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Intervue API is running" });
