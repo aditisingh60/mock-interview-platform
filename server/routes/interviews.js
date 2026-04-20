@@ -1,8 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const { submitInterview, getHistory } = require("../controllers/interviewController");
+const authMiddleware = require("../middleware/authMiddleware");
+const { checkDailyLimit } = require("../middleware/planMiddleware");
 
-router.get('/', (req, res) => {
-  res.send('Interviews route');
-});
+router.post("/submit", authMiddleware, checkDailyLimit, submitInterview);
+router.get("/history", authMiddleware, getHistory);
 
 module.exports = router;
